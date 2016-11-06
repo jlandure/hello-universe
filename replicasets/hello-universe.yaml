@@ -5,7 +5,7 @@ metadata:
     run: hello-universe
   name: hello-universe
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
         - name: hello-universe
-          image: "kelseyhightower/hello-universe:1.0.0"
+          image: "jlandure/hello-universe:0.0.1"
           args:
             - "-http=0.0.0.0:80"

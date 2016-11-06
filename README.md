@@ -1,5 +1,43 @@
 # hello-universe
 
+## Démos
+
+- Show the code from handler.go
+- Launch the code and go `localhost:8080`
+```
+go run main.go handler.go -http 0.0.0.0:8080
+go build -o hello main.go handler.go && ./hello
+```
+- Show the Dockerfile
+- Create the image
+```
+docker build -t jlandure/hello-universe:0.0.1 .
+```
+- Launch using Docker and go to `http://192.168.99.100/`
+```
+docker run -p 80:80 jlandure/hello-universe:0.0.1
+```
+- Push the image
+```
+docker push jlandure/hello-universe:0.0.1
+```
+- get credentials for your K8S/GKE 
+```
+gcloud --project PROJECT container clusters get-credentials CLUSTER
+#service account from kubectl
+kubectl get serviceAccounts/default -o yaml
+kubectl describe secrets/default-token-q73rg
+```
+
+- Manual deployment
+```
+kubectl create -f replicasets/hello-universe.yaml
+kubectl create -f services/hello-universe.yaml
+kubectl describe services/hello-universe
+kubectl scale --replicas=3 -f replicasets/hello-universe.yaml
+```
+- go to `http://130.211.75.174/` and check the hostname
+
 ## Example Usage
 
 ```
