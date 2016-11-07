@@ -37,6 +37,8 @@ kubectl describe services/hello-universe
 kubectl scale --replicas=3 -f replicasets/hello-universe.yaml
 ```
 - go to `http://130.211.75.174/` and check the hostname
+- use the script `iwget` for infinite loop calls
+- check logs with `kubectl logs hello-universe-2me3w` 
 
 ## Example Usage
 
