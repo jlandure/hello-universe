@@ -1,5 +1,4 @@
 while [ 1 ]; do
-	wget -q --no-dns-cache http://130.211.75.174 -O - | grep Hostname;
-    #no need for this demoif [ $? = 0 ]; then break; fi; # check return value, break if successful (0)
+	wget -q --no-dns-cache http://35.230.74.10/ -O - | grep Hostname;
     sleep 0.7s;
 done;

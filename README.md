@@ -6,7 +6,7 @@
 - Launch the code and go `localhost:8080`
 ```
 go run main.go handler.go -http 0.0.0.0:8080
-go build -o hello main.go handler.go && ./hello
+go build -o hello main.go handler.go && ./hello -http 0.0.0.0:8080
 ```
 - Show the Dockerfile
 - Create the image
@@ -15,7 +15,7 @@ docker build -t jlandure/hello-universe:0.0.1 .
 ```
 - Launch using Docker and go to `http://192.168.99.100/`
 ```
-docker run -p 80:80 jlandure/hello-universe:0.0.1
+docker run -p 8080:8080 jlandure/hello-universe:0.0.1 --http 0.0.0.0:8080
 ```
 - Push the image
 ```
@@ -23,7 +23,7 @@ docker push jlandure/hello-universe:0.0.1
 ```
 - get credentials for your K8S/GKE 
 ```
-gcloud --project PROJECT container clusters get-credentials CLUSTER
+gcloud --project matinale-k8s container clusters get-credentials test-z
 #service account from kubectl
 kubectl get serviceAccounts/default -o yaml
 kubectl describe secrets/default-token-q73rg
@@ -39,6 +39,14 @@ kubectl scale --replicas=3 -f replicasets/hello-universe.yaml
 - go to `http://130.211.75.174/` and check the hostname
 - use the script `iwget` for infinite loop calls
 - check logs with `kubectl logs hello-universe-2me3w` 
+
+- Autoscaling
+```
+kubectl apply -f autoscaling/hpa.yaml
+watch -n 1 kubectl get pods
+watch -n 1 kubectl get hpa
+ab -c 100 -n 1000 -t 10000 http://35.230.74.10/
+```
 
 ## Example Usage
 
